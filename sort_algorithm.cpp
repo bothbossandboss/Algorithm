@@ -45,14 +45,46 @@ void bubbleSort(int Data[], int n){
 
 void selectionSort(int Data[], int n){
 	int min;
+	int sum = 0;
 	for(int i=0;i<MAX_STUDENT_COUNT;i++){
 		min = i;
 		for(int j=i+1;j<MAX_STUDENT_COUNT;j++){
+			sum++;
 			if(Data[min] > Data[j]) min = j;
 		}
-		mySwap(Data, min, i);
+		if(min != i) mySwap(Data, min, i);
 	}
+	printf("sum = %d\n", sum);
 	return;
+}
+
+void insertionSort(int Data[], int n){
+	int beginPlace, comparePlace;
+	// 比較を始める位置を 1 から順番に n - 1 まで動かしていく
+	for(beginPlace = 1;beginPlace < n;beginPlace++){
+		int x = Data[beginPlace];
+		//以下のループをスルーする間はソート済みである。
+		for(comparePlace = beginPlace - 1;comparePlace >= 0 && x < Data[comparePlace];comparePlace--){
+			//挿入位置が見つかるまで配列をずらす。
+			Data[comparePlace+1] = Data[comparePlace];
+		}
+		if(comparePlace != beginPlace -1){
+			//挿入しソート済み部分を更新
+			Data[comparePlace+1] = x;
+		}
+	}
+}
+
+void check(int data1[], int data2[], int n){
+	int c = 0;
+	for(int i=0;i<n;i++){
+		if(data1[i] == data2[i]) c++;
+	}
+	if(c == n){
+		printf("equal\n");
+	}else{
+		printf("not equal\n");
+	}
 }
 
 int main(int argc, char *argv[]){
@@ -64,8 +96,10 @@ int main(int argc, char *argv[]){
 		another[i] = data[i];
 	}
 	bubbleSort(data, MAX_STUDENT_COUNT);
-	printData(data);
-	selectionSort(another, MAX_STUDENT_COUNT);
-	printData(another);
+//	printData(data);
+	//selectionSort(another, MAX_STUDENT_COUNT);
+	insertionSort(another, MAX_STUDENT_COUNT);
+//	printData(another);
+	check(data, another, MAX_STUDENT_COUNT);
 	return 0;
 }
