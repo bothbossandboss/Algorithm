@@ -5,7 +5,8 @@
 #include <assert.h>
 #include <iostream>
 
-#define MAX_STUDENT_COUNT 100
+#define MAX_STUDENT_COUNT 1000
+#define MAX_TURN 1000
 
 using namespace std;
 
@@ -109,18 +110,12 @@ void quickSort(int data[], int left, int right, int N){
 
 int main(int argc, char *argv[]){
 	srand((unsigned)time(NULL));
-	int data[MAX_STUDENT_COUNT];
-	int another[MAX_STUDENT_COUNT];
-	makeData(data);
-	for(int i=0;i<MAX_STUDENT_COUNT;i++){
-		another[i] = data[i];
+	int *data;
+	data = (int *)malloc( sizeof(int) * MAX_STUDENT_COUNT);
+	for(int t=0;t<MAX_TURN;t++){
+		makeData(data);
+		//bubbleSort(data, MAX_STUDENT_COUNT);
+		quickSort(data, 0, MAX_STUDENT_COUNT-1, MAX_STUDENT_COUNT);
 	}
-	bubbleSort(data, MAX_STUDENT_COUNT);
-//	printData(data);
-	//selectionSort(another, MAX_STUDENT_COUNT);
-//	insertionSort(another, MAX_STUDENT_COUNT);
-	quickSort(another, 0, MAX_STUDENT_COUNT-1, MAX_STUDENT_COUNT);
-//	printData(another);
-	check(data, another, MAX_STUDENT_COUNT);
 	return 0;
 }
