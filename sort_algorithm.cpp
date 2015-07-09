@@ -87,6 +87,26 @@ void check(int data1[], int data2[], int n){
 	}
 }
 
+void quickSort(int data[], int left, int right, int N){
+	if(right <= left) return;
+	int pivot, i, j;
+	//pivotを選択
+	pivot = (data[left] + data[right]) / 2;
+	for(i=left, j=right; ;){
+		while(data[i] < pivot) i++;
+		while(data[j] > pivot) j--;
+		if(i > j) break; //整列済み
+		else if(i == j){
+			i++; j--; break; //pivotと一致
+		}else{
+			mySwap(data, i, j);
+			i++; j--;
+		}
+	}
+	quickSort(data, left, j, N);
+	quickSort(data, i, right, N);
+}
+
 int main(int argc, char *argv[]){
 	srand((unsigned)time(NULL));
 	int data[MAX_STUDENT_COUNT];
@@ -98,7 +118,8 @@ int main(int argc, char *argv[]){
 	bubbleSort(data, MAX_STUDENT_COUNT);
 //	printData(data);
 	//selectionSort(another, MAX_STUDENT_COUNT);
-	insertionSort(another, MAX_STUDENT_COUNT);
+//	insertionSort(another, MAX_STUDENT_COUNT);
+	quickSort(another, 0, MAX_STUDENT_COUNT-1, MAX_STUDENT_COUNT);
 //	printData(another);
 	check(data, another, MAX_STUDENT_COUNT);
 	return 0;
