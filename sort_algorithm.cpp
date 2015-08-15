@@ -33,7 +33,7 @@ void bubbleSort(int Data[], int n){
 	int beginPlace, comparePlace;
 	// 比較を始める位置を最初から n-1 まで変えていく
 	for(beginPlace = 0;beginPlace < n;beginPlace++){
-		//n - beginPlace まで比較する
+		//右側(indexが大きい方)から大小関係が確定していくので、n - beginPlace まで比較する
 		for(comparePlace = 1;comparePlace < n - beginPlace;comparePlace++){
 			// 右のほうが小さかったら交換する
 			if(Data[comparePlace - 1] > Data[comparePlace]){
