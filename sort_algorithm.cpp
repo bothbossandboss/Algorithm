@@ -31,7 +31,6 @@ void mySwap(int data[], int a, int b){
 
 void bubbleSort(int Data[], int n){
 	int beginPlace, comparePlace;
-	// 比較を始める位置を最初から n-1 まで変えていく
 	for(beginPlace = 0;beginPlace < n;beginPlace++){
 		//右側(indexが大きい方)から大小関係が確定していくので、n - beginPlace まで比較する
 		for(comparePlace = 1;comparePlace < n - beginPlace;comparePlace++){
@@ -45,17 +44,16 @@ void bubbleSort(int Data[], int n){
 }
 
 void selectionSort(int Data[], int n){
+	//左側(indexが小さい方)から大小関係が確定してゆく
 	int min;
-	int sum = 0;
-	for(int i=0;i<MAX_STUDENT_COUNT;i++){
+	for(int i=0;i<n;i++){
+		//比較開始位置(index=i)から一番右の中で最小のものと比較開始位置を入れ替える
 		min = i;
-		for(int j=i+1;j<MAX_STUDENT_COUNT;j++){
-			sum++;
+		for(int j=i+1;j<n;j++){
 			if(Data[min] > Data[j]) min = j;
 		}
 		if(min != i) mySwap(Data, min, i);
 	}
-	printf("sum = %d\n", sum);
 	return;
 }
 
