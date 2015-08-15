@@ -69,7 +69,7 @@ void insertionSort(int Data[], int n){
 		}
 		if(comparePlace != beginPlace -1){
 			//挿入しソート済み部分を更新
-			Data[comparePlace+1] = x;
+			Data[comparePlace+1] = x; //comparePlace+1 = beginPlace
 		}
 	}
 }
