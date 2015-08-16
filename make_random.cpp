@@ -7,8 +7,9 @@
 #include <vector>
 #include <algorithm>
 
-#define OUTPUT "result/gauss.dat"
+#define OUTPUT "result/exponential_random.dat"
 #define MAX_TURN 10000
+unsigned int M = 2147483647;
 
 using namespace std;
 /**
@@ -35,7 +36,7 @@ double gaussRandSin(double mu, double sigma){
  * 線形合同法(Linear Congruential Generator)を用いた方法
  * x:乱数の初期値、N:データ数、m:データ範囲。0〜m-1の整数乱数を発生させる。
  */
-void linearRandom(int x, int m, int data[], int N){
+void linearRandom(int x, int m, unsigned int data[], int N){
 	int a = 1103515245;
 	int b = 12345;
 	data[0] = (x * a + b) % m;
@@ -44,29 +45,26 @@ void linearRandom(int x, int m, int data[], int N){
 	}
 }
 
+double exponentialRandom(double lamda){
+	return log(lamda / uniformRand()) / lamda;
+}
+
 int dice(){
 	return (int)(uniformRand() * 1000.0) % 6 + 1;
 }
 
 int main(int argc, char *argv[]){
 	int i;
-/*	FILE *output;
+	FILE *output;
 	if( (output = fopen(OUTPUT, "w")) == NULL ){
 		perror("open output file");
 		return -1;
 	}
-*/
 	srand((unsigned int)time(NULL));
-	int count[7];
-	for(i=0;i<7;i++){
-		count[i] = 0;
-	}
 	for(i=0;i<MAX_TURN;i++){
-		int r = dice();
-		++count[r];
-	}
-	for(i=1;i<=6;i++){
-		printf("%d : %d (%4.2f)\n", i, count[i], (double)count[i]/MAX_TURN);
+		double x = exponentialRandom(1.0);
+		double y = exponentialRandom(1.0);
+		fprintf(output, "%f %f\n", x, y);
 	}
 	return 0;
 }
