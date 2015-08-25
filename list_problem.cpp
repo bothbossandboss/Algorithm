@@ -38,9 +38,9 @@ List *reverse(List *list){
 
 int main(int argc, char *argv[]){
 	List *first, *second, *third;
-	first = (List *)malloc(sizeof(List*));
-	second = (List *)malloc(sizeof(List*));
-	third = (List *)malloc(sizeof(List*));
+	first = (List *)malloc(sizeof(List));
+	second = (List *)malloc(sizeof(List));
+	third = (List *)malloc(sizeof(List));
 	first->v = 1;
 	first->next = second;
 	second->v = 3;
