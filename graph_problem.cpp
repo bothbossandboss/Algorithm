@@ -19,6 +19,8 @@ typedef struct node{
 	char name;
 } Node;
 
+int count = 0;
+
 int calc(Node *t){
 	printf("%c -> ", t->name);
 	int v1, v2, r;
@@ -30,7 +32,9 @@ int calc(Node *t){
 			v1 = calc(t->left);
 			v2 = calc(t->right);
 			t->k = VALUE;
+			printf("(change at %c)", t->name);
 			t->val = v1 + v2;
+			count++;
 			r = t->val;
 			break;
 	}
@@ -82,5 +86,6 @@ int main(int argc, char *argv[]){
 
 	int r = calc(A);
 	printf("\nresult = %d\n", r);
+	printf("count = %d\n", count);
 	return 0;
 }
